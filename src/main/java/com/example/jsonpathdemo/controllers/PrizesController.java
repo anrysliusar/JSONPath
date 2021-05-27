@@ -18,7 +18,6 @@ import java.util.List;
 public class PrizesController {
     private final PrizesService prizesService;
 
-    @SuppressWarnings("unchecked")
     @GetMapping("")
     public List<Prize> getPrizes() throws IOException {
         String expression = "$.prizes[*]";
@@ -26,28 +25,24 @@ public class PrizesController {
 
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/{index}")
     public HashMap<String, Object> getChosenPrize(@PathVariable String index) throws IOException {
         String expression = "$.prizes[" + index + "]";
         return (HashMap<String, Object>) prizesService.getFormattedResponseFromFile(expression);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/{start}/{end}")
     public List<Prize> getRangeOfPrizes(@PathVariable String start, @PathVariable String end) throws IOException {
         String expression = "$.prizes[" + start + ":" + end + "]";
         return (List<Prize>) prizesService.getFormattedResponseFromFile(expression);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/{start}/{end}/{step}")
     public List<Prize> getChosenPrizes(@PathVariable String start, @PathVariable String end, @PathVariable String step) throws IOException {
         String expression = "$.prizes[" + start + ":" + end + ":" + step + "]";
         return (List<Prize>) prizesService.getFormattedResponseFromFile(expression);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/categories")
     public List<String> getCategories() throws IOException {
         String expression = "$.prizes[*].category";

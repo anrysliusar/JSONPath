@@ -17,21 +17,18 @@ import java.util.List;
 public class LaureateController {
     private final PrizesService prizesService;
 
-    @SuppressWarnings("unchecked")
     @GetMapping("")
     public List<Laureate> getLaureates() throws IOException {
         String expression = "$.prizes[*].laureates[*]";
         return (List<Laureate>) prizesService.getFormattedResponseFromFile(expression);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/year/{year}")
     public List<Laureate> getLaureatesOfYear(@PathVariable int year) throws IOException {
         String expression = "$.prizes[?(@.year == " + year + ")].laureates[*]";
         return (List<Laureate>) prizesService.getFormattedResponseFromFile(expression);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/firstnames")
     public List<String> getFirstnames() throws IOException {
         String expression = "$.prizes[*].laureates[*].firstname";
